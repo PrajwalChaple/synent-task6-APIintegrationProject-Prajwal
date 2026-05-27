@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Integration Hub - Dynamic Dashboard</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- App Wrapper -->
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-logo">
+                <span class="logo-icon">⚡</span>
+                <h1>API Hub</h1>
+            </div>
+            
+            <div class="header-controls">
+                <!-- API Online Indicator -->
+                <div class="api-status" id="connection-status">
+                    <span class="status-dot online"></span>
+                    <span class="status-text">Network Online</span>
+                </div>
+                
+                <!-- Theme Toggle Button -->
+                <button class="icon-btn theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs" aria-label="API Sections">
+            <button class="tab-btn active" data-tab="github" id="tab-github">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                <span>GitHub Explorer</span>
+            </button>
+            
+            <button class="tab-btn" data-tab="weather" id="tab-weather">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                    <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path>
+                </svg>
+                <span>Weather Station</span>
+            </button>
+            
+            <button class="tab-btn" data-tab="quotes" id="tab-quotes">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Inspirational Quotes</span>
+            </button>
+        </nav>
+
+        <!-- Main Panel Content -->
+        <main class="panel-container">
+            
+            <!-- PANEL: GITHUB EXPLORER -->
+            <section class="panel active" id="github-panel" aria-hidden="false">
+                <div class="panel-header">
+                    <h2>GitHub Explorer</h2>
+                    <p>Search and discover developer profiles and repositories directly from the GitHub API.</p>
+                </div>
+                
+                <!-- Search Form -->
+                <form class="search-form" id="github-search-form">
+                    <div class="input-wrapper">
+                        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="github-username" placeholder="Enter GitHub username (e.g. torvalds)..." required autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                
+                <!-- Results Wrapper -->
+                <div class="result-container" id="github-results">
+                    <!-- Standard Welcome State -->
+                    <div class="empty-state">
+                        <div class="empty-icon">🐙</div>
+                        <h3>Find Any Developer</h3>
+                        <p>Enter a username above to search profiles, view metrics, and inspect repositories in real-time.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- PANEL: WEATHER STATION -->
+            <section class="panel" id="weather-panel" aria-hidden="true">
+                <div class="panel-header">
+                    <h2>Weather Station</h2>
+                    <p>Get real-time forecasts and conditions worldwide using the open-source Open-Meteo API.</p>
+                </div>
+                
+                <!-- Preset Quick Buttons & Custom Search -->
+                <div class="weather-controls-row">
+                    <div class="preset-cities" id="preset-cities-container">
+                        <button class="preset-btn active" data-city="Mumbai">Mumbai</button>
+                        <button class="preset-btn" data-city="New York">New York</button>
+                        <button class="preset-btn" data-city="London">London</button>
+                        <button class="preset-btn" data-city="Tokyo">Tokyo</button>
+                        <button class="preset-btn" data-city="Paris">Paris</button>
+                    </div>
+                    
+                    <form class="search-form weather-search" id="weather-search-form">
+                        <div class="input-wrapper">
+                            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            <input type="text" id="weather-city-input" placeholder="Search custom city (e.g., Sydney)..." required autocomplete="off">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+                
+                <!-- Weather Output Container -->
+                <div class="result-container" id="weather-results">
+                    <!-- Loaded dynamically on init -->
+                </div>
+            </section>
+            
+            <!-- PANEL: INSPIRATIONAL QUOTES -->
+            <section class="panel" id="quotes-panel" aria-hidden="true">
+                <div class="panel-header">
+                    <h2>Inspirational Quotes</h2>
+                    <p>Refresh your mind with motivating thoughts curated from a random quotes API.</p>
+                </div>
+                
+                <!-- Quote Display Area -->
+                <div class="result-container" id="quotes-results">
+                    <!-- Loaded dynamically on init -->
+                </div>
+            </section>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 API Integration Hub. Powered by native Fetch API. Built with 💻 by Prajwal.</p>
+        </footer>
+        
+    </div>
+
+    <!-- Toast Notification Wrapper -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- API Logic Scripts -->
+    <script src="quotes.js"></script>
+    <script src="weather.js"></script>
+    <script src="github.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
