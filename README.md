@@ -4,7 +4,14 @@ API Integration Hub is a stunning, high-fidelity single-page web dashboard featu
 
 ---
 
-## 🚀 Live Demo / Features
+## 🔗 Live Demo
+
+Access the live web application on GitHub Pages here:
+👉 **[https://prajwalchaple.github.io/synent-task6-APIintegrationProject-Prajwal/](https://prajwalchaple.github.io/synent-task6-APIintegrationProject-Prajwal/)**
+
+---
+
+## 🚀 Key Features
 
 ### 1. 🔍 GitHub User Explorer
 - Search for any active GitHub user.
